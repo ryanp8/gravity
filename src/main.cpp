@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 {
 
     if (argc != 2) {
-        std::cout << "Usage: ./Gravity numPlanets\n";
+        std::cout << "Usage: ./gravity numPlanets\n";
         exit(-1);
     }
     auto window = sf::RenderWindow{ { 800u, 800u }, "Barnes-Hut Gravity" };

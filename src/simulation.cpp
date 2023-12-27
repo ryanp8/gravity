@@ -1,7 +1,7 @@
 #include "simulation.hpp"
 
 Simulation::Simulation(int numPlanets):
-    tree(std::unique_ptr<Node>(new Node(0, 0, 800)))
+    tree(new Node(0, 0, 800))
     {
         srand(time(NULL));
         for (int i = 0; i < numPlanets; i++) {
