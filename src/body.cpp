@@ -11,7 +11,8 @@ void Body::draw(sf::RenderWindow &screen) {
 }
 
 sf::Vector2<double> Body::_calculateAcceleration(double m, double x, double y, double r2) {
-    double fg = G * m / (r2 + DAMPENING_FACTOR);
+    // Use dampening factor for better visualization. Otherwise bodies will fly away too quickly
+    double fg = G * m / (r2 + DAMPENING_FACTOR); // Newton's Law of Gravitation
     double theta = atan2(y - this->y, x - this->x);
     return sf::Vector2(fg * cos(theta) * SPEED, fg * sin(theta) * SPEED);
 }
@@ -20,6 +21,11 @@ void Body::accelerate(std::unique_ptr<Node> &n) {
     if (n && n->body.get() == this) {
         return;
     }
+
+    // For internal nodes, check if they are too far away.
+    // If so, then use the center of mass and mass of the internal node for calculations and stop traversing.
+    // If not, then continue to the traverse the tree and use individual body values when
+    // we come across an external node that contains a planet and that cannot be further traversed.
     if (n->status == INTERNAL) {
         double d = (this->x - n->mx/n->mass)*(this->x - n->mx/n->mass) + (this->y - n->my/n->mass)*(this->y - n->my/n->mass);
         if (n->w / sqrt(d) < theta_threshold) {

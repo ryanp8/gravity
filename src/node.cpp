@@ -25,7 +25,13 @@ void Node::insert(std::shared_ptr<Body> p, int depth) {
             this->children[1] = std::unique_ptr<Node>(new Node(this->x, this->y, midW));
             this->children[2] = std::unique_ptr<Node>(new Node(this->x, this->y + midW, midW));
             this->children[3] = std::unique_ptr<Node>(new Node(this->x + midW, this->y + midW, midW));
+
+            // If the tree goes this deep, then we know that two bodies are very close to each other
+            // So, we can apply elastic collision to them. One of the bodies must become inactive,
+            // so it does not affect future calculations.
+            // TODO: Implement more robust collision detection
             if (depth < 12) {
+                // Keep on trying to insert the overlapping bodies until they are in different quadrants
                 this->insert(p, depth + 1);
                 this->insert(p2, depth + 1);
             } else {
@@ -39,6 +45,8 @@ void Node::insert(std::shared_ptr<Body> p, int depth) {
         }
     } else {
         int q = this->_findQuadrant(p);
+
+        // Accumulate the mass and center of mass for the internal node the the body goes into
         this->mass += p->mass;
         this->mx += p->mass * p->x;
         this->my += p->mass * p->y;
