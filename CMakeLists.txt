@@ -16,6 +16,7 @@ add_executable(${PROJECT_NAME}
     src/body.cpp
     src/node.cpp
     src/simulation.cpp
+    src/theta_threshold.hpp
 )
 target_link_libraries(${PROJECT_NAME} sfml-graphics)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)

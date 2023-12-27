@@ -2,11 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <math.h>
 #include "node.hpp"
+#include "theta_threshold.hpp"
 
 #define G 1
 #define SPEED 0.2
 #define DAMPENING_FACTOR 1000000
-#define BH_THRESHOLD 1
 
 class Node;
 class Body {

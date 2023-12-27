@@ -22,7 +22,7 @@ void Body::accelerate(std::unique_ptr<Node> &n) {
     }
     if (n->status == INTERNAL) {
         double d = (this->x - n->mx/n->mass)*(this->x - n->mx/n->mass) + (this->y - n->my/n->mass)*(this->y - n->my/n->mass);
-        if (n->w / sqrt(d) < BH_THRESHOLD) {
+        if (n->w / sqrt(d) < theta_threshold) {
             sf::Vector2<double> a = this->_calculateAcceleration(n->mass, n->mx/n->mass, n->my/n->mass, d);
             this->vx += a.x;
             this->vy += a.y;
