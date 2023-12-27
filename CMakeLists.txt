@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-set(PROJECT_NAME Gravity)
+set(PROJECT_NAME gravity)
 project(${PROJECT_NAME} LANGUAGES CXX)
 
 include(FetchContent)
