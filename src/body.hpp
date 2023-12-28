@@ -31,4 +31,6 @@ private:
     at (x, y) with mass m has on this body.
     Result is used by the accelerate() function.*/
     sf::Vector2<double> _calculateAcceleration(double m, double x, double y, double r2);
+
+    double dist_squared(double x2, double y2);
 };

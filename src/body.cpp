@@ -27,7 +27,7 @@ void Body::accelerate(std::unique_ptr<Node> &n) {
     // If not, then continue to the traverse the tree and use individual body values when
     // we come across an external node that contains a planet and that cannot be further traversed.
     if (n->status == INTERNAL) {
-        double d = (this->x - n->mx/n->mass)*(this->x - n->mx/n->mass) + (this->y - n->my/n->mass)*(this->y - n->my/n->mass);
+        double d = this->dist_squared(n->mx/n->mass, n->my/n->mass);
         if (n->w / sqrt(d) < theta_threshold) {
             sf::Vector2<double> a = this->_calculateAcceleration(n->mass, n->mx/n->mass, n->my/n->mass, d);
             this->vx += a.x;
@@ -40,7 +40,7 @@ void Body::accelerate(std::unique_ptr<Node> &n) {
             }
         }
     } else if (n->body && n->body->active) {
-        double d = (this->x - n->body->x)*(this->x - n->body->x) + (this->y - n->body->y)*(this->y - n->body->y);
+        double d = this->dist_squared(n->body->x, n->body->y);
         sf::Vector2<double> a = this->_calculateAcceleration(n->body->mass, n->body->x, n->body->y, d);
         this->vx += a.x;
         this->vy += a.y;
@@ -50,4 +50,8 @@ void Body::accelerate(std::unique_ptr<Node> &n) {
 void Body::update() {
     this->x += this->vx;
     this->y += this->vy;
+}
+
+double Body::dist_squared(double x2, double y2) {
+    return (this->x - x2)*(this->x - x2) + (this->y - y2)*(this->y - y2);
 }
