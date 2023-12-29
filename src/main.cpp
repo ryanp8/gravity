@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <thread>
 #include "simulation.hpp"
 #include "node.hpp"
 #include "body.hpp"
@@ -11,13 +12,16 @@ float theta_threshold;
 int main(int argc, char* argv[])
 {
 
-    if (argc != 3) {
-        std::cout << "Usage: ./gravity numPlanets theta\n";
+    if (argc > 4) {
+        std::cout << "Usage: ./gravity <numPlanets theta threads>\n";
         exit(-1);
     }
-
     int numPlanets  = atoi(argv[1]);
     theta_threshold = atof(argv[2]);
+    int threads     = 1;
+    if (argc > 3) {
+        threads = atoi(argv[3]);
+    }
     if (theta_threshold < 0) {
         std::cout << "Theta must be positive\n";
         exit(-1);
@@ -38,7 +42,7 @@ int main(int argc, char* argv[])
         }
 
         window.clear();
-        sim.update();
+        sim.update(threads);
         sim.draw(window);
         window.display();
     }

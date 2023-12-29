@@ -17,7 +17,7 @@ sf::Vector2<double> Body::_calculateAcceleration(double m, double x, double y, d
     return sf::Vector2(fg * cos(theta) * SPEED, fg * sin(theta) * SPEED);
 }
 
-void Body::accelerate(std::unique_ptr<Node> &n) {
+void Body::accelerate(std::shared_ptr<Node> &n) {
     if (n && n->body.get() == this) {
         return;
     }

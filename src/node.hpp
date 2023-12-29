@@ -23,7 +23,7 @@ public:
     double x, y, mass, mx, my;
     int w, status;
     std::shared_ptr<Body> body;
-    std::array<std::unique_ptr<Node>, NUM_SUB> children;
+    std::array<std::shared_ptr<Node>, NUM_SUB> children;
 private:
     void _drawNode(sf::RenderWindow &screen);
 

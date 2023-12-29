@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 set(PROJECT_NAME gravity)
 project(${PROJECT_NAME} LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -10,7 +11,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
-add_compile_options(-Wall -Ofast)
+add_compile_options(-Wall -Ofast -pthread)
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/body.cpp
