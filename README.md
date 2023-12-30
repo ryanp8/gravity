@@ -10,6 +10,6 @@ When bodies are sufficiently close to each other, they collide elastically.
 4. Run the simulation using `./gravity [number of bodies] <theta threshold threads=1>`. Example: `./gravity 1000 0.5 4`
 
 ## Todo
-[] Improve multithreading, so threads are not recreated on each frame. Instead, create `numThreads` worker threads when the simulation begins. For each tick, add the planets to the queue. When the queue is not empty, one of the workers will pop and process one planet from the queue.
+- [ ] Improve multithreading: threads should not be recreated on each frame. Instead, create `numThreads` worker threads when the simulation begins. For each tick, add the planets to the queue. When the queue is not empty, one of the workers will pop and process one planet from the queue.
 
 ![demo image](https://github.com/ryanp8/gravity/blob/main/assets/demo.png?raw=true)
