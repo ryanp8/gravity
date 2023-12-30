@@ -11,5 +11,6 @@ When bodies are sufficiently close to each other, they collide elastically.
 
 ## Todo
 - [ ] Improve multithreading: threads should not be recreated on each frame. Instead, create `numThreads` worker threads when the simulation begins. For each tick, add the planets to the queue. When the queue is not empty, one of the workers will pop and process one planet from the queue.
+- [ ] Create a model that scales the view to the size of the solar system and uses the proper distances/masses of the planets and the sun.
 
 ![demo image](https://github.com/ryanp8/gravity/blob/main/assets/demo.png?raw=true)
