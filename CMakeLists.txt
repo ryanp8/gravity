@@ -11,7 +11,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
-add_compile_options(-Wall -Ofast -pthread)
+add_compile_options(-Wall -Ofast -flto -pthread)
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/body.cpp
