@@ -4,8 +4,14 @@ Simulation of gravity using Barnes-Hut Algorithm, improving time complexity from
 When bodies are sufficiently close to each other, they collide elastically.
 
 ### Todo
-- [ ] Improve multithreading: threads should not be recreated on each frame. Instead, create `numThreads` worker threads when the simulation begins and create a queue to store planets that must be processed. For each tick, add the planets to the queue. While the queue is not empty, each of the workers will pop and process planets from the queue. In progress: learn about locks, `std::condition_variable`.
-- [ ] Create a model that scales the view to the size of the solar system and uses the proper distances/masses of the planets and the sun.
+- [x] Add multithreading
+  - Once all the bodies have been added to the quadtree, their accelerations can be computed independently from each other.
+- [ ] Improve multithreading
+  - From testing, basic multithreading is inefficient. Threads should not be recreated on each frame.
+  - New approach: create `numThreads` worker threads when the simulation begins and create a queue to store planets that must be processed. For each tick, add the planets to the queue. While the queue is not empty, each of the workers will pop and process planets from the queue. In progress: learn about locks, `std::condition_variable`.
+- [ ] Create models
+  - [ ] Solar system that scales the view to the correct size and uses the proper distances/masses of the planets and the sun.
+  - [ ] Two colliding galaxies
 
 ## Instructions
 1. Clone this repository and enter the project directory.
