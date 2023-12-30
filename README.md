@@ -1,6 +1,6 @@
 # Gravity Simulation
 
-Simulation of gravity using the Barnes-Hut Algorithm and C++. Bodies are visualized using SFML.
+Simulation of gravity using Barnes-Hut Algorithm, improving time complexity from O(n^2) to O(nlog(n)). Bodies are visualized using SFML.
 When bodies are sufficiently close to each other, they collide elastically.
 
 ### Todo
