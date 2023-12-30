@@ -36,10 +36,6 @@ void Simulation::updateChunk(int chunk, int num_threads, std::shared_ptr<Node> t
     }
 }
 
-void Simulation::test(int i) {
-    std::cout << "Thread " << i << "\n";
-}
-
 void Simulation::update(int num_threads) {
     this->tree = std::make_shared<Node>(0, 0, 800);
     for (auto planet : this->planets) {
@@ -47,23 +43,11 @@ void Simulation::update(int num_threads) {
             this->tree->insert(planet, 1);
         }
     }
-
     std::vector<std::thread> threads;
     for (int i = 0; i < num_threads; i++) {
-        // threads.push_back(std::thread(&test, i));
         threads.push_back(std::thread(&updateChunk, i, num_threads, this->tree, this->planets));
     }
     for (auto &thread : threads) {
         thread.join();
     }
-    // for (auto planet : this->planets) {
-    //     if (planet->active) {
-    //         planet->accelerate(this->tree);
-    //     }
-    // }
-    // for (auto planet : this->planets) {
-    //     if (planet->active) {
-    //         planet->update();
-    //     }
-    // }
 }

@@ -25,6 +25,4 @@ public:
     std::vector<std::shared_ptr<Body>> planets;
 private:
     static void updateChunk(int chunk, int num_threads, std::shared_ptr<Node> tree, std::vector<std::shared_ptr<Body>> planets);
-
-    static void test(int);
 };
