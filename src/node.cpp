@@ -20,7 +20,7 @@ void Node::insert(std::shared_ptr<Body> &p, int depth) {
         } else {
             this->status = INTERNAL;
             double midW = this->w / 2;
-            auto p2 = std::move(this->body);
+            auto p2 = this->body;
             this->body = NULL;
 
             this->children[0] = std::make_unique<Node>(this->x + midW, this->y, midW);

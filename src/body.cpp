@@ -11,7 +11,7 @@ void Body::draw(sf::RenderWindow &screen) {
 }
 
 sf::Vector2<double> Body::_calculateAcceleration(double m, double x, double y, double r2) {
-    // Use dampening factor for better visualization-> Otherwise bodies will fly away too quickly
+    // Use dampening factor for better visualization. Otherwise bodies will fly away too quickly
     double fg = G * m / (r2 + DAMPENING_FACTOR); // Newton's Law of Gravitation
     double theta = atan2(y - this->y, x - this->x);
     return sf::Vector2(fg * cos(theta) * SPEED, fg * sin(theta) * SPEED);
@@ -35,7 +35,7 @@ void Body::accelerate(const std::unique_ptr<Node> &nodePtr) {
             this->vy += a.y;
         } else {
             for (int i = 0; i < NUM_SUB; i++) {
-                if (n->children[i])  {
+                if (n->children[i]) {
                     this->accelerate(n->children[i]);
                 }
             }
