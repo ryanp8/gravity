@@ -11,17 +11,18 @@ void Body::draw(sf::RenderWindow &screen) {
 }
 
 sf::Vector2<double> Body::_calculateAcceleration(double m, double x, double y, double r2) {
-    // Use dampening factor for better visualization. Otherwise bodies will fly away too quickly
+    // Use dampening factor for better visualization-> Otherwise bodies will fly away too quickly
     double fg = G * m / (r2 + DAMPENING_FACTOR); // Newton's Law of Gravitation
     double theta = atan2(y - this->y, x - this->x);
     return sf::Vector2(fg * cos(theta) * SPEED, fg * sin(theta) * SPEED);
 }
 
-void Body::accelerate(std::shared_ptr<Node> &n) {
-    if (n && n->body.get() == this) {
+void Body::accelerate(const std::unique_ptr<Node> &nodePtr) {
+
+    Node *n = nodePtr.get();
+    if (n->body && n->body.get() == this) {
         return;
     }
-
     // For internal nodes, check if they are too far away.
     // If so, then use the center of mass and mass of the internal node for calculations and stop traversing.
     // If not, then continue to the traverse the tree and use individual body values when
@@ -34,7 +35,7 @@ void Body::accelerate(std::shared_ptr<Node> &n) {
             this->vy += a.y;
         } else {
             for (int i = 0; i < NUM_SUB; i++) {
-                if (n->children[i]) {
+                if (n->children[i])  {
                     this->accelerate(n->children[i]);
                 }
             }

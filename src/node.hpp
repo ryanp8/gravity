@@ -19,16 +19,17 @@ public:
     void drawBodies(sf::RenderWindow &screen);
 
     /*Inserts a planet into the quadtree*/
-    void insert(std::shared_ptr<Body> p, int depth);
+    void insert(std::shared_ptr<Body> &p, int depth);
     double x, y, mass, mx, my;
     int w, status;
+
     std::shared_ptr<Body> body;
-    std::array<std::shared_ptr<Node>, NUM_SUB> children;
+    std::array<std::unique_ptr<Node>, NUM_SUB> children;
 private:
     void _drawNode(sf::RenderWindow &screen);
 
     /*Calculates which quadrant of an internal node that a new body should be put into.
     Quadrants are numbered the same as those on the cartesian plane.
     */
-    int _findQuadrant(std::shared_ptr<Body> p);
+    int _findQuadrant(const std::shared_ptr<Body> &p);
 };
