@@ -18,9 +18,11 @@ public:
     /*Inserts each planet into the quadtree. Then calculates the forces on each body,
     updating the body's velocity in the process. Once all the forces have been calculated,
     each body's position is updated*/
-    void update(sf::RenderWindow &screen, int num_threads);
+    void update(int num_threads);
 
     int numPlanets;
-    // Node tree;
+    std::shared_ptr<Node> tree;
     std::vector<std::shared_ptr<Body>> planets;
+private:
+    static void updateChunk(int chunk, int num_threads, std::shared_ptr<Node> tree, std::vector<std::shared_ptr<Body>> planets);
 };

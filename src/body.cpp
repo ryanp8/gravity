@@ -17,12 +17,11 @@ sf::Vector2<double> Body::_calculateAcceleration(double m, double x, double y, d
     return sf::Vector2(fg * cos(theta) * SPEED, fg * sin(theta) * SPEED);
 }
 
-void Body::accelerate(const std::unique_ptr<Node> &nodePtr) {
-
-    Node *n = nodePtr.get();
-    if (n->body && n->body.get() == this) {
+void Body::accelerate(std::shared_ptr<Node> &n) {
+    if (n && n->body.get() == this) {
         return;
     }
+
     // For internal nodes, check if they are too far away.
     // If so, then use the center of mass and mass of the internal node for calculations and stop traversing.
     // If not, then continue to the traverse the tree and use individual body values when

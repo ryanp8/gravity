@@ -20,7 +20,7 @@ public:
     force caused by each node. Applies Barnes-Hut Algorithm, so nodes that are too
     far away (depending on the provided theta_threshold) are not traversed.
     */
-    void accelerate(const std::unique_ptr<Node> &nodePtr);
+    void accelerate(std::shared_ptr<Node> &n);
 
     /*Adjust the current position given the x and y velocity*/
     void update();

@@ -12,21 +12,19 @@ Node::Node(double x, double y, int w, int status):
     status(status)
     {};
 
-
-void Node::insert(std::shared_ptr<Body> &p, int depth) {
+void Node::insert(std::shared_ptr<Body> p, int depth) {
     if (this->status == EXTERNAL) {
         if (!this->body) {
             this->body = p;
         } else {
             this->status = INTERNAL;
             double midW = this->w / 2;
-            auto p2 = this->body;
+            std::shared_ptr<Body> p2 = this->body;
             this->body = NULL;
-
-            this->children[0] = std::make_unique<Node>(this->x + midW, this->y, midW);
-            this->children[1] = std::make_unique<Node>(this->x, this->y, midW);
-            this->children[2] = std::make_unique<Node>(this->x, this->y + midW, midW);
-            this->children[3] = std::make_unique<Node>(this->x + midW, this->y + midW, midW);
+            this->children[0] = std::make_shared<Node>(this->x + midW, this->y, midW);
+            this->children[1] = std::make_shared<Node>(this->x, this->y, midW);
+            this->children[2] = std::make_shared<Node>(this->x, this->y + midW, midW);
+            this->children[3] = std::make_shared<Node>(this->x + midW, this->y + midW, midW);
 
             // If two bodies are very close to each other, the collide elastically.
             // One of the bodies is marked as inactive so it does not affect future calculations.
@@ -42,7 +40,7 @@ void Node::insert(std::shared_ptr<Body> &p, int depth) {
                 p->vx = (p->mass * p->vx + p2->mass * p2->vx) / (p->mass + p2->mass);
                 p->vy = (p->mass * p->vy + p2->mass * p2->vy) / (p->mass + p2->mass);
                 p2->active = false;
-                this->body = std::move(p);
+                this->body = p;
             }
         }
     } else {
@@ -56,7 +54,7 @@ void Node::insert(std::shared_ptr<Body> &p, int depth) {
     }
 }
 
-int Node::_findQuadrant(const std::shared_ptr<Body> &p) {
+int Node::_findQuadrant(std::shared_ptr<Body> p) {
     double midW = this->w / 2;
     if (p->x > this->x + midW) {
         if (p->y < this->y + midW) {

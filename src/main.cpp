@@ -18,13 +18,15 @@ int main(int argc, char* argv[])
     }
     int numPlanets  = atoi(argv[1]);
     theta_threshold = atof(argv[2]);
-
+    int threads     = 1;
+    if (argc > 3) {
+        threads = atoi(argv[3]);
+    }
     if (theta_threshold < 0) {
         std::cout << "Theta must be positive\n";
         exit(-1);
     }
 
-    // Create SFML window
     auto window = sf::RenderWindow{ { 800u, 800u }, "Barnes-Hut Gravity" };
     window.setFramerateLimit(30);
     Simulation sim(numPlanets);
@@ -40,7 +42,8 @@ int main(int argc, char* argv[])
         }
 
         window.clear();
-        sim.update(window, 1);
+        sim.update(threads);
+        sim.draw(window);
         window.display();
     }
 }
