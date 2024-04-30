@@ -3,7 +3,7 @@
 Simulation of gravity using Barnes-Hut Algorithm, improving time complexity from O(n^2) to O(nlog(n)). Bodies are visualized using SFML.
 When bodies are sufficiently close to each other, they collide elastically.
 
-### Todo
+### Extra Features
 - [x] Add multithreading
   - Once all the bodies have been added to the quadtree, their accelerations can be computed independently from each other.
 - [x] Improve multithreading
