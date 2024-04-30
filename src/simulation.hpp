@@ -5,12 +5,13 @@
 #include <cstdlib>
 #include <thread>
 #include <time.h>
+#include <numeric>
 #include "node.hpp"
 #include "body.hpp"
 
 class Simulation {
 public:
-    Simulation(int numPlanets);
+    Simulation(int numPlanets, int numThreads);
 
     /*Traverses the quadtree and draws active bodies to the screen.*/
     void draw(sf::RenderWindow &screen);
@@ -23,6 +24,8 @@ public:
     int numPlanets;
     std::shared_ptr<Node> tree;
     std::vector<std::shared_ptr<Body>> planets;
+    std::vector<std::thread> workers;
+
 private:
     static void updateChunk(int chunk, int num_threads, std::shared_ptr<Node> tree, std::vector<std::shared_ptr<Body>> planets);
 };

@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     auto window = sf::RenderWindow{ { 800u, 800u }, "Barnes-Hut Gravity" };
     window.setFramerateLimit(30);
-    Simulation sim(numPlanets);
+    Simulation sim(numPlanets, threads);
 
     while (window.isOpen())
     {
