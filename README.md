@@ -9,8 +9,6 @@ When bodies are sufficiently close to each other, they collide elastically.
 - [ ] Improve multithreading
   - From testing, basic multithreading is inefficient. Threads should not be recreated on each frame.
   - New approach: create `numThreads` worker threads when the simulation begins and create a queue to store planets that must be processed. For each tick, add the planets to the queue. While the queue is not empty, each of the workers will pop and process planets from the queue. In progress: learn about locks, `std::condition_variable`.
-- [ ] Fix collision checking
-  - Collisions that should occur at an edge of a quadtree subregion are not detected because collisions are based on tree depth.
 - [ ] Create models
   - [ ] Solar system that scales the view to the correct size and uses the proper distances/masses of the planets and the sun.
   - [ ] Two colliding galaxies
