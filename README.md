@@ -3,10 +3,10 @@
 Simulation of gravity using Barnes-Hut Algorithm, improving time complexity from O(n^2) to O(nlog(n)). Bodies are visualized using SFML.
 When bodies are sufficiently close to each other, they collide elastically.
 
-### Todo
+### Extra Features
 - [x] Add multithreading
   - Once all the bodies have been added to the quadtree, their accelerations can be computed independently from each other.
-- [ ] Improve multithreading
+- [x] Improve multithreading
   - From testing, basic multithreading is inefficient. Threads should not be recreated on each frame.
   - New approach: create `numThreads` worker threads when the simulation begins and create a queue to store planets that must be processed. For each tick, add the planets to the queue. While the queue is not empty, each of the workers will pop and process planets from the queue. In progress: learn about locks, `std::condition_variable`.
 - [ ] Create models
